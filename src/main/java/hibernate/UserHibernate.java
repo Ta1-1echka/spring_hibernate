@@ -2,10 +2,8 @@ package hibernate;
 
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -38,14 +36,13 @@ public class UserHibernate {
         return hibernateTemplate.save(u);
     }
 
-    @Transactional(value = "transactionManager", readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class})
     public void updateUser(User u) {
         hibernateTemplate.update(u);
     }
 
-    public List<User> isUserExist(String login) {
+    public boolean isUserExist(String login) {
         User u = new User();
         u.setLogin(login);
-        return hibernateTemplate.findByExample(u);
+        return hibernateTemplate.findByExample(u).size()==0 ? false : true;
     }
 }

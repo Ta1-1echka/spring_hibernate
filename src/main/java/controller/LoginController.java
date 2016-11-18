@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/")
-@SessionAttributes("user")
+@SessionAttributes("sessionUser")
 public class LoginController {
 
     @Autowired
@@ -39,6 +39,7 @@ public class LoginController {
 
             modelAndView.setViewName("welcome");
             modelAndView.addObject("user",list.get(0));
+            modelAndView.addObject("sessionUser",list.get(0));
 
         }
         else {

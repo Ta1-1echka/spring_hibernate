@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/registration")
-@SessionAttributes("user")
+@SessionAttributes("sessionUser")
 public class RegistrationController {
 
     @Autowired
@@ -33,9 +33,11 @@ public class RegistrationController {
     public ModelAndView registerUser(ModelAndView modelAndView, @ModelAttribute("user") User user) {
 
 
-        if (userHibernate.isUserExist(user.getLogin()).size() == 0) {
+        if (!userHibernate.isUserExist(user.getLogin())) {
             modelAndView.setViewName("welcome");
-            modelAndView.addObject("user", userHibernate.createUser(user));
+            userHibernate.createUser(user);
+            modelAndView.addObject("user",user);
+            modelAndView.addObject("sessionUser",user);
         } else {
             modelAndView.setViewName("registration");
             modelAndView.addObject("message", "Данный пользователь уже существует");

@@ -15,6 +15,18 @@ public class User {
     private String lastname;
     private String email;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "iduser=" + iduser +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "iduser")
     public int getIduser() {

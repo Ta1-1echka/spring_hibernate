@@ -15,6 +15,8 @@
 </head>
 <body>
 <form:form action="/edit/save" method="post" modelAttribute="user" >
+    <form:hidden path="iduser"/>
+    <form:hidden path="password"/>
     <table align="center">
         <tr>
             <td>Login</td>
